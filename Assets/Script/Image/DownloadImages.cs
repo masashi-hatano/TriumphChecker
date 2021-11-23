@@ -80,7 +80,7 @@ public class DownloadImages : DownloadExif
         if (this.textures.Count > 0)
         {
             imageHolder.texture = this.textures[0];
-            //imageHolder.SizeToParent();
+            imageHolder.SizeToTexture();
             currentSlide = (currentSlide + 1) % this.textures.Count;
         }
     }
@@ -119,7 +119,7 @@ public class DownloadImages : DownloadExif
         if (this.textures.Count > 0 && timeSinceLast > changeTime )
         {
             imageHolder.texture = textures[currentSlide];
-            //imageHolder.SizeToParent();
+            imageHolder.SizeToTexture();
             timeSinceLast = 0.0f;
             currentSlide = (currentSlide + 1) % textures.Count;
         }

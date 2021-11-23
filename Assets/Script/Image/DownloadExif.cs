@@ -49,11 +49,20 @@ public class DownloadExif : MonoBehaviour
 			j++;
 			text.text = j.ToString() + " " + jpi.DateTime;
 
-			CultureInfo provider = CultureInfo.InvariantCulture;
-			string format = "yyyy:MM:dd HH:mm:ss";
-			DateTime parsedDate = DateTime.ParseExact(jpi.DateTime, format, provider);
+			DateTime parsedDate;
 
-			if (parsedDate >= this.time_big && parsedDate <= this.time_end)
+			try
+			{
+				CultureInfo provider = CultureInfo.InvariantCulture;
+				string format = "yyyy:MM:dd HH:mm:ss";
+				parsedDate = DateTime.ParseExact(jpi.DateTime, format, provider);
+			}
+			catch (System.Exception e)
+            {
+				parsedDate = this.time_end;
+			}
+
+			if (parsedDate >= this.time_big && parsedDate < this.time_end)
 			{
 				Texture2D tex = new Texture2D(2, 2);
 				tex.LoadImage(results);
