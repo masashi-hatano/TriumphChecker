@@ -11,66 +11,45 @@ using System.Linq;
 public class DownloadImages : DownloadExif
 {
     public RawImage imageHolder;
+    public Image loadingBar;
     private List<Texture2D> textures = new List<Texture2D>();
-    private DateTime time1 = new DateTime(2021,11,15,00,00,00);
-    private DateTime time2 = new DateTime(2021,11,16,23,59,59);
     public float changeTime = 10.0f;
     private int currentSlide = 0;
     private float timeSinceLast = 1.0f;
     private List<string> galleryImages;
-    
-
-    private IEnumerator AskForPermissions()
-    {
-        List<bool> permissions = new List<bool>() { false, false };
-        List<bool> permissionsAsked = new List<bool>() { false, false };
-        List<Action> actions = new List<Action>()
-        {
-            new Action(() => {
-                permissions[0] = Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite);
-                if (!permissions[0] && !permissionsAsked[0])
-                {
-                    Permission.RequestUserPermission(Permission.ExternalStorageWrite);
-                    permissionsAsked[0] = true;
-                    return;
-                }
-            }),
-            new Action(() => {
-                permissions[1] = Permission.HasUserAuthorizedPermission(Permission.ExternalStorageRead);
-                if (!permissions[1] && !permissionsAsked[1])
-                {
-                    Permission.RequestUserPermission(Permission.ExternalStorageRead);
-                    permissionsAsked[1] = true;
-                    return;
-                }
-            })
-        };
-        for (int i = 0; i < permissionsAsked.Count;)
-        {
-            actions[i].Invoke();
-            text.text = (Permission.HasUserAuthorizedPermission(Permission.ExternalStorageRead) && Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite)).ToString();
-            if (permissions[i])
-            {
-                ++i;
-            }
-            yield return new WaitForEndOfFrame();
-        }
-    }
+    private List<string> paths = new List<string>();
 
     public IEnumerator LoadImages()
     {
         System.Random rnd = new System.Random();
+   
+        loadingBar.gameObject.SetActive(true);
+        loadingBar.fillAmount = 0f;
+        int nb_images = this.galleryImages.Count();
+        int counter = 0;
 
         foreach (string path in this.galleryImages)
         {
+            counter++;
+            loadingBar.fillAmount = (1f / nb_images) * counter;
+
             this.imagePath = path;
             yield return StartCoroutine(LoadTexture());
             if (this.texture != null)
             {
-                k++;
-                text.text = k.ToString();
+                this.paths.Add(path);
                 this.textures.Add(this.texture);
             }
+        }
+        loadingBar.gameObject.SetActive(false);
+        text.text = this.paths.Count().ToString();
+
+
+        int l = 0;
+        if (LoadScene.new_scene)
+        {
+            text.text = "Saved";
+            LoadScene.SaveGame(this.paths);
         }
 
         if (this.textures.Count > 10)
@@ -83,19 +62,25 @@ public class DownloadImages : DownloadExif
             imageHolder.SizeToTexture();
             currentSlide = (currentSlide + 1) % this.textures.Count;
         }
+        imageHolder.gameObject.SetActive(true);
     }
 
     // Start is called before the first frame update
     void Start()
     {
 
-        StartCoroutine(AskForPermissions());
-
-        this.time_big = time1;
-        this.time_end = time2;
+        this.time_big = LoadScene.time_big;
+        this.time_end = LoadScene.time_end;
 
         //galleryImages = new List<string>();
-        galleryImages = FindPaths.GetAllGalleryImagePaths();
+        if (LoadScene.new_scene)
+        {
+            galleryImages = FindPaths.GetAllGalleryImagePaths();
+        }
+        else
+        {
+            galleryImages = LoadScene.paths_photos;
+        }
 
         //galleryImages.Add("file:///C:/Users/elime/OneDrive/Documents/Keio/real world/testimages/IMG_20211116_151650.jpg");
         //galleryImages.Add("file:///C:/Users/elime/OneDrive/Documents/Keio/real world/testimages/IMG_20211116_151651.jpg");
