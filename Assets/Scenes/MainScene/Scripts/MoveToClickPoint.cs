@@ -7,10 +7,12 @@ public class MoveToClickPoint : MonoBehaviour {
     NavMeshAgent agent;
     GameObject[] point_Objects;
     GameObject clickedGameObject;
+    Animator animator;
     
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         point_Objects = GameObject.FindGameObjectsWithTag("point");
+        animator = GetComponent<Animator>();
     }
     
     void Update() {
@@ -33,5 +35,11 @@ public class MoveToClickPoint : MonoBehaviour {
                 
             }
         }
+        animator.SetFloat("Forward", agent.velocity.magnitude);
+        //animator.SetFloat("Turn", agent.velocity.magnitude);
+        //animator.SetFloat("Crouch", agent.velocity.magnitude);
+        //animator.SetFloat("OnGround", agent.velocity.magnitude);
+        //animator.SetFloat("Jump", agent.velocity.magnitude);
+        //animator.SetFloat("JumpLeg", agent.velocity.magnitude);
     }
 }
