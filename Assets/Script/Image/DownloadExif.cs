@@ -15,9 +15,6 @@ public class DownloadExif : MonoBehaviour
 	private string orientationString;
 	public DateTime time_big;
 	public DateTime time_end;
-	public Text text;
-	public int j = 0;
-	public int k = 0;
 
 	public IEnumerator LoadTexture()
 	{
@@ -36,7 +33,6 @@ public class DownloadExif : MonoBehaviour
 		if (www.isNetworkError || www.isHttpError)
 		{
 			Debug.Log(www.error);
-			text.text = url + www.error.ToString();
 		}
 		else
 		{
@@ -45,9 +41,6 @@ public class DownloadExif : MonoBehaviour
 
 			Debug.Log("Finished Getting Image -> SIZE: " + results.Length.ToString());
 			ExifLib.JpegInfo jpi = ExifLib.ExifReader.ReadJpeg(results, "Sample File");
-
-			j++;
-			text.text = j.ToString() + " " + jpi.DateTime;
 
 			DateTime parsedDate;
 

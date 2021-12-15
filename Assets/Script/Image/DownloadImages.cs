@@ -42,13 +42,12 @@ public class DownloadImages : DownloadExif
             }
         }
         loadingBar.gameObject.SetActive(false);
-        text.text = this.paths.Count().ToString();
+
 
 
         int l = 0;
         if (LoadScene.new_scene)
         {
-            text.text = "Saved";
             LoadScene.SaveGame(this.paths);
         }
 

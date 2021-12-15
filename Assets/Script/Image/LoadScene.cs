@@ -17,7 +17,7 @@ public class LoadScene : MonoBehaviour
     public static DateTime time_end;
     public static List<string> paths_photos = null;
     public static bool new_scene = false;
-    public Text text;
+    public Text text_city;
 
 
     private IEnumerator AskUser()
@@ -65,10 +65,10 @@ public class LoadScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadScene.city_name = "paris";
+        LoadScene.city_name = "Saint-Pons-De-Thomières";
         LoadScene.ID = 0;
-        LoadScene.time_big = new DateTime(2021, 11, 16, 00, 00, 00);
-        LoadScene.time_end = new DateTime(2021, 11, 16, 23, 59, 59);
+        LoadScene.time_big = new DateTime(2021, 12, 13, 00, 00, 00);
+        LoadScene.time_end = new DateTime(2021, 12, 13, 23, 59, 59);
 
         if (!(File.Exists(Application.persistentDataPath
                        + "/MySaveData_" + LoadScene.ID + ".dat")))
@@ -78,12 +78,10 @@ public class LoadScene : MonoBehaviour
 
         StartCoroutine(AskUser());
 
-        text.text = "hold";
-
         LoadScene.ID = 0;
 
         LoadGame();
-        text.text = LoadScene.city_name;
+        text_city.text = LoadScene.city_name;
     }
 
     public static void SaveGame(List<string> paths_photos)
@@ -126,10 +124,6 @@ public class LoadScene : MonoBehaviour
             }
 
             Debug.Log("Game data loaded!");
-        }
-        else
-        {
-            text.text = "There is no save data!";
         }
     }
 }

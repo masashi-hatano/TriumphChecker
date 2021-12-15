@@ -666,9 +666,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   imagePath: 
-  text: {fileID: 651527299}
-  j: 0
-  k: 0
   imageHolder: {fileID: 56806585}
   loadingBar: {fileID: 1013663663}
   changeTime: 10
@@ -698,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5428537462035a74f816b00baa8eee97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 651527299}
+  text_city: {fileID: 651527299}
 --- !u!1 &1456199636
 GameObject:
   m_ObjectHideFlags: 0
