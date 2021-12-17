@@ -645,6 +645,7 @@ GameObject:
   - component: {fileID: 1146997271}
   - component: {fileID: 1146997270}
   - component: {fileID: 1146997272}
+  - component: {fileID: 1146997273}
   m_Layer: 0
   m_Name: Code
   m_TagString: Untagged
@@ -696,6 +697,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text_city: {fileID: 651527299}
+--- !u!114 &1146997273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146997269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fb7ccad94e2cd4ba647a724cc92e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelToLoad: SampleScene
 --- !u!1 &1456199636
 GameObject:
   m_ObjectHideFlags: 0

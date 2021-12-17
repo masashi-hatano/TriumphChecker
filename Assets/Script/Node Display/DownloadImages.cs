@@ -45,10 +45,9 @@ public class DownloadImages : DownloadExif
 
 
 
-        int l = 0;
-        if (LoadScene.new_scene)
+        if (GameData.new_scene)
         {
-            LoadScene.SaveGame(this.paths);
+            GameData.SaveNode(this.paths);
         }
 
         if (this.textures.Count > 10)
@@ -68,17 +67,17 @@ public class DownloadImages : DownloadExif
     void Start()
     {
 
-        this.time_big = LoadScene.time_big;
-        this.time_end = LoadScene.time_end;
+        this.time_big = GameData.time_big;
+        this.time_end = GameData.time_end;
 
         //galleryImages = new List<string>();
-        if (LoadScene.new_scene)
+        if (GameData.new_scene)
         {
             galleryImages = FindPaths.GetAllGalleryImagePaths();
         }
         else
         {
-            galleryImages = LoadScene.paths_photos;
+            galleryImages = GameData.paths_photos;
         }
 
         //galleryImages.Add("file:///C:/Users/elime/OneDrive/Documents/Keio/real world/testimages/IMG_20211116_151650.jpg");
