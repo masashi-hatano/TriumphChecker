@@ -6,11 +6,13 @@ public class ShowVerificationText : MonoBehaviour
 {
     GameObject[] point_Objects;
     GameObject clickedGameObject;
+    public GameObject gameObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameObject = GameObject.Find("GameObject");
+        point_Objects = GameObject.FindGameObjectsWithTag("point");
     }
 
     // Update is called once per frame
@@ -24,12 +26,8 @@ public class ShowVerificationText : MonoBehaviour
             
             if (Physics.Raycast(ray, out hit, 100)) {
                 clickedGameObject = hit.collider.gameObject;
-                for (int i = 0; i < point_Objects.Length; i++)
-                {
-                    if (clickedGameObject.transform == point_Objects[i].transform){
-                        //messageBox.Show(Callback, "Hello World!", "Hello");
-                        break;
-                    }
+                if (clickedGameObject.transform.position == this.transform.position){
+                    gameObject.GetComponent<VerificationText>().FieldActive();
                 }
             }
         }
