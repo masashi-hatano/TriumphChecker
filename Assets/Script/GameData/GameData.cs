@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.UI;
 
 public class GameData
 {
@@ -12,6 +13,7 @@ public class GameData
     public static GameObject panelCreate;
     public static GameObject panelTextDelete;
     public static GameObject panelDelete;
+    public static Text text;
 
     public static Vector3 player_pos;
     public static Dictionary<int,Vector3> nodes_pos;

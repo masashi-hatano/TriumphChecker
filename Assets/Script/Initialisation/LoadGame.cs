@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class LoadGame : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class LoadGame : MonoBehaviour
     public GameObject panelCreate;
     public GameObject panelTextDelete;
     public GameObject panelDelete;
+    public Text text;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,7 @@ public class LoadGame : MonoBehaviour
         GameData.panelCreate = GameObject.Find("PanelCreate");
         GameData.panelTextDelete = GameObject.Find("PanelTextDelete");
         GameData.panelDelete = GameObject.Find("PanelDelete");
+        GameData.text = text;
 
         GameData.panel.SetActive(false);
         GameData.panelCreate.SetActive(false);

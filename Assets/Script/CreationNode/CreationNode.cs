@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CreationNode : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class CreationNode : MonoBehaviour
     public GameObject Terrain;
     public GameObject panelText;
     public GameObject panelCreate;
+    public Text text;
     // Start is called before the first frame update
     void Start()
     {
         panelCreate = GameData.panelCreate;
         panelText = GameData.panelText;
+        text = GameData.text;
     }
 
     // Update is called once per frame
@@ -33,6 +36,7 @@ public class CreationNode : MonoBehaviour
                     panelText.SetActive(false);
                     GameData.Creation = true;
                     GameData.click_pos = hit.point;
+                    text.text = "Do you want to\ndelete your memory?";
                 }
             }
         }
