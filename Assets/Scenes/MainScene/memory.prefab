@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 241543280284595888}
   - component: {fileID: 241543280284595889}
   - component: {fileID: 241543280284595893}
+  - component: {fileID: 2487664744310608878}
   m_Layer: 0
   m_Name: memory
   m_TagString: point
@@ -106,4 +107,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9168679a1556b21448a58f5352034a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 0}
+  ID: 0
+  panel: {fileID: 0}
+  panelText: {fileID: 0}
+  panelTextDelete: {fileID: 0}
+--- !u!114 &2487664744310608878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241543280284595890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12190cf7e7ef0c428b2222c69125702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+  panelDelete: {fileID: 0}
+  panelTextDelete: {fileID: 0}

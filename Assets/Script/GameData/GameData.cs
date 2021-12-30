@@ -7,9 +7,22 @@ using System.IO;
 
 public class GameData
 {
+    public static GameObject panel;
+    public static GameObject panelText;
+    public static GameObject panelCreate;
+    public static GameObject panelTextDelete;
+    public static GameObject panelDelete;
+
     public static Vector3 player_pos;
     public static Dictionary<int,Vector3> nodes_pos;
     public static int nb_nodes;
+
+    public static bool NewMemoryMode;
+    public static bool DeleteMemoryMode;
+    public static bool Creation;
+
+    public static Vector3 click_pos;
+    public static GameObject delete_node;
 
 
     public static void SaveGame()

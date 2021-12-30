@@ -6,20 +6,18 @@ using UnityEngine.UI;
 
 public class MoveToClickPoint : MonoBehaviour {
     NavMeshAgent agent;
-    GameObject[] point_Objects;
     GameObject clickedGameObject;
     Animator animator;
     public GameObject fieldObject;
     
     void Start() {
         agent = GetComponent<NavMeshAgent>();
-        point_Objects = GameObject.FindGameObjectsWithTag("point");
         animator = GetComponent<Animator>();
         fieldObject = GameObject.Find("Canvas");
     }
     
     void Update() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (!GameData.Creation && Input.GetMouseButtonDown(0)) {
             clickedGameObject = null;
             if (true)
             {   
@@ -28,12 +26,9 @@ public class MoveToClickPoint : MonoBehaviour {
             
                 if (Physics.Raycast(ray, out hit, 100)) {
                     clickedGameObject = hit.collider.gameObject;
-                    for (int i = 0; i < point_Objects.Length; i++)
-                    {
-                        if (clickedGameObject.transform == point_Objects[i].transform){
-                            agent.destination = hit.point;
-                            break;
-                        }
+                    if (clickedGameObject.tag == "point"){
+                        agent.destination = hit.point;
+                        GameData.player_pos = hit.point;
                     }
                 }
             }
