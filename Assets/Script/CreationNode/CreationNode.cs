@@ -36,7 +36,7 @@ public class CreationNode : MonoBehaviour
                     panelText.SetActive(false);
                     GameData.Creation = true;
                     GameData.click_pos = hit.point;
-                    text.text = "Do you want to\ndelete your memory?";
+                    text.text = "Which memory do\nyou want to store ?";
                 }
             }
         }
