@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ShowDeleteText : MonoBehaviour
 {
@@ -19,23 +20,29 @@ public class ShowDeleteText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameData.DeleteMemoryMode && !GameData.Creation && Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            clickedGameObject = null;
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit = new RaycastHit();
-
-            if (Physics.Raycast(ray, out hit, 100))
+            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
-                clickedGameObject = hit.collider.gameObject;
-                if (clickedGameObject.transform.position == this.transform.position)
+                if (GameData.DeleteMemoryMode && !GameData.Creation)
                 {
-                    GameData.ID = ID;
-                    GameData.delete_node = this.gameObject;
-                    panelDelete.SetActive(true);
-                    panelTextDelete.SetActive(false);
-                    GameData.Creation = true;
+                    clickedGameObject = null;
+
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit = new RaycastHit();
+
+                    if (Physics.Raycast(ray, out hit, 100))
+                    {
+                        clickedGameObject = hit.collider.gameObject;
+                        if (clickedGameObject.transform.position == this.transform.position)
+                        {
+                            GameData.ID = ID;
+                            GameData.delete_node = this.gameObject;
+                            panelDelete.SetActive(true);
+                            panelTextDelete.SetActive(false);
+                            GameData.Creation = true;
+                        }
+                    }
                 }
             }
         }

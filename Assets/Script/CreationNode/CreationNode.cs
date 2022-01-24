@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CreationNode : MonoBehaviour
 {
@@ -21,22 +22,28 @@ public class CreationNode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameData.NewMemoryMode && !GameData.Creation && Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            RaycastHit hit;
-            RaycastHit hit_node;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Collider collider = Terrain.GetComponent<Collider>();
-            if (collider.Raycast(ray, out hit, 100))
+            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
-                Physics.Raycast(ray, out hit_node, 100);
-                if (hit_node.collider.gameObject.tag != "point")
+                if (GameData.NewMemoryMode && !GameData.Creation)
                 {
-                    panelCreate.SetActive(true);
-                    panelText.SetActive(false);
-                    GameData.Creation = true;
-                    GameData.click_pos = hit.point;
-                    text.text = "Which memory do\nyou want to store ?";
+                    RaycastHit hit;
+                    RaycastHit hit_node;
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    Collider collider = Terrain.GetComponent<Collider>();
+                    if (collider.Raycast(ray, out hit, 100))
+                    {
+                        Physics.Raycast(ray, out hit_node, 100);
+                        if (hit_node.collider.gameObject.tag != "point")
+                        {
+                            panelCreate.SetActive(true);
+                            panelText.SetActive(false);
+                            GameData.Creation = true;
+                            GameData.click_pos = hit.point;
+                            text.text = "Which memory do\nyou want to store ?";
+                        }
+                    }
                 }
             }
         }

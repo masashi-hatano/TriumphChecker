@@ -27,8 +27,11 @@ public class MoveToClickPoint : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit, 100)) {
                     clickedGameObject = hit.collider.gameObject;
                     if (clickedGameObject.tag == "point"){
-                        agent.destination = hit.point;
-                        GameData.player_pos = hit.point;
+                        Vector3 vect = hit.point - agent.transform.position;
+                        vect.Normalize();
+                        vect = hit.point - 2*vect;
+                        agent.destination = vect;
+                        GameData.player_pos = vect;
                     }
                 }
             }

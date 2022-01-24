@@ -65,6 +65,10 @@ public class AddListenerEnter : MonoBehaviour
         GameData.time_end = time_end;
         GameData.SaveNode(null);
         GameObject memo = Instantiate(memory, pos, Quaternion.identity);
+        foreach (Transform child in memo.transform)
+        {
+            child.GetComponent<TextMesh>().text = city_name + "\n\n\n\n\n\n\n\n\n\n\n" + time_big.ToString("d", CultureInfo.CreateSpecificCulture("en-US")) + " - " + time_end.ToString("d", CultureInfo.CreateSpecificCulture("en-US"));
+        }
         ShowVerificationText script1 = memo.GetComponent<ShowVerificationText>();
         ShowDeleteText script2 = memo.GetComponent<ShowDeleteText>();
         script1.ID = GameData.nb_nodes;
