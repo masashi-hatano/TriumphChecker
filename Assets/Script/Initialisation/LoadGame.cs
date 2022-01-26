@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
+using System.Globalization;
 
 public class LoadGame : MonoBehaviour
 {
@@ -52,10 +53,24 @@ public class LoadGame : MonoBehaviour
         foreach (KeyValuePair<int,Vector3> memory_pos in GameData.nodes_pos)
         {
             GameObject memo = Instantiate(memory, memory_pos.Value, Quaternion.identity);
+            GameData.ID = memory_pos.Key;
+            GameData.LoadNode();
+            foreach (Transform child in memo.transform)
+            {
+                child.GetComponent<TextMesh>().text = GameData.city_name + "\n\n\n\n\n\n\n\n\n\n\n" + GameData.time_big.ToString("d", CultureInfo.CreateSpecificCulture("en-US")) + " - " + GameData.time_end.ToString("d", CultureInfo.CreateSpecificCulture("en-US"));
+            }
             ShowVerificationText script1 = memo.GetComponent<ShowVerificationText>();
             ShowDeleteText script2 = memo.GetComponent<ShowDeleteText>();
             script1.ID = memory_pos.Key;
             script2.ID = memory_pos.Key;
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 }
